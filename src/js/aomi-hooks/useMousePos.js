@@ -1,6 +1,6 @@
 import { reactive, onMounted, onBeforeUnmount, toRefs } from 'vue'
 
-export function useMousePos() {
+export function useMousePos(containerRef) {
     const pos = reactive({x: 0, y: 0})
 
     function updatePos(e) {
@@ -10,11 +10,13 @@ export function useMousePos() {
     }
 
     onMounted(() => {
-        window.addEventListener('mousemove', updatePos, false)
+        console.log('---', containerRef)
+        
+        containerRef.value.addEventListener('mousemove', updatePos, false)
     })
 
     onBeforeUnmount(() => {
-        window.removeEventListener('mousemove', updatePos, false)
+        containerRef.value.removeEventListener('mousemove', updatePos, false)
     })
 
     return toRefs(pos)

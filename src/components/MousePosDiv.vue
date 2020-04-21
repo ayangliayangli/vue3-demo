@@ -1,5 +1,5 @@
 <template>
-    <div class="g-rect-200-200">
+    <div class="g-rect-200-200" ref="containerRef">
         <p>mouse move here</p>
         <span>
             {{ mousePos }}
@@ -9,12 +9,17 @@
 
 <script>
 import { useMousePos } from '../js/aomi-hooks/useMousePos.js'
+import { ref } from 'vue'
+
 export default {
     name: 'MousePosDiv',
     setup () {
-        const mousePos = useMousePos()
+        const containerRef = ref(null)
+        const mousePos = useMousePos(containerRef)
+        
         return {
-            mousePos
+            mousePos,
+            containerRef
         }
     }
 }
