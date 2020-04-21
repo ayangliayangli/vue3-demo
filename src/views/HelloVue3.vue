@@ -10,20 +10,21 @@
             <span>ref: {{ reactiveData }} </span>
             <button @click="handleClickChangeReactiveData">change</button>
         </p>
-        <p>
-            <span>mouse position: </span>
-            <span>{{ mousePos }}</span>
-        </p>
+
+        <MousePosDiv></MousePosDiv>
+        
     </div>
 </template>
 
 <script>
 import { ref, reactive, computed, watchEffect, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted} from 'vue'
-import { useMousePos } from '../js/aomi-hooks/useMousePos.js'
+import MousePosDiv from '../components/MousePosDiv.vue'
 export default {
     name: 'HelloVue3',
+    components: {
+        MousePosDiv
+    },
     setup () {
-        const mousePos = useMousePos()
         const titleRef = ref('this is title')
         const reactiveData = reactive({
             name: 'yangli',
@@ -75,7 +76,6 @@ export default {
             reactiveData,
             handleClickChangeTitle,
             handleClickChangeReactiveData,
-            mousePos
         }
     },
 }
